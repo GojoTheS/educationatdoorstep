@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+        }
+        .search-container input {
+            padding: 8px;
+            margin-right: 5px;
+            border: none;
+            border-radius: 4px;
+        }
+        .search-container button {
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+        .search-container button:hover, .dropdown button:hover, header button:hover {
+            background-color: #777;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .sub-dropdown {
+            position: relative;
+        }
+        .sub-dropdown-content {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .sub-dropdown:hover .sub-dropdown-content {
+            display: block;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #searchResults {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="search-container">
+            <button onclick="window.location.href='Website.html'">Home</button>
+            <input type="text" id="searchInput" placeholder="Search..">
+            <button onclick="performSearch()">Search</button>
+            <div class="dropdown">
+                <button>Subjects</button>
+                <div class="dropdown-content">
+                    <script>
+                        const subjects = ["Math", "Science", "History", "Literature", "Geography", "Art", "Music", "Technology", "Languages"];
+                        document.write(subjects.map(subject => `
+                            <div class='sub-dropdown'>
+                                <a href='#'>${subject}</a>
+                                <div class='sub-dropdown-content'>
+                                    ${Array.from({length: 12}, (_, i) => `<a href='#'>Grade ${i + 1}</a>`).join('')}
+                                </div>
+                            </div>
+                        `).join(''));
+                    </script>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button onclick="window.location.href='support.html'">Support Us</button>
+            <button onclick="window.location.href='signup.html'">Sign Up / Log In</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Welcome to Our Website</h1>
+        <p>Explore our wide range of subjects and resources tailored for students from Grade 1 to Grade 12.</p>
+        <p id="searchResults"></p>
+    </div>
+
+    <script>
+        function performSearch() {
+            const query = document.getElementById("searchInput").value.trim();
+            if (!query) {
+                document.getElementById("searchResults").textContent = "Please enter a search term.";
+                return;
+            }
+            document.getElementById("searchResults").textContent = `No results found for "${query}"`;
+        }
+    </script>
+
+</body>
+</html>
